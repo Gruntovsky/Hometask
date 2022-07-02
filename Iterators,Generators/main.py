@@ -1,40 +1,44 @@
 from data import nested_list
-# print(nested_list[0][0])
-
 print()
 print('Iterator')
 class FlatIterator:
-    def __init__ (self,nested_list,start:int,end:int, step:int = 1):
-        self.nested_list = nested_list
-        self.start = start
-        self.end = end
-        self.step =  step
+
+    def __init__(self, some_list):
+        self.main_list = some_list
 
     def __iter__(self):
-        self.cursor = self.start - self.step
+        self.main_list_cursor = 0  # курсор основного списка
+        self.nested_list_cursor = 0 # курсор списка вложенного в основной список
         return self
 
     def __next__(self):
-        self.cursor += self.step
-        if self.cursor == len(nested_list):
+        if self.main_list_cursor == len(nested_list):
             raise StopIteration
-        return nested_list[self.cursor]
+        elif self.nested_list_cursor == len(nested_list[self.main_list_cursor]):
+             self.main_list_cursor += 1
+             self.nested_list_cursor = 0
+        else:
+            position = nested_list [self.main_list_cursor][self.nested_list_cursor]
+            self.nested_list_cursor += 1
+            return position
 
 
 
-for item in FlatIterator(nested_list,0,len(nested_list)):
-     for result in item:
-         print(result)
-
+flat_list = []
+for item in FlatIterator(nested_list):
+   flat_list.append(item)
+print(flat_list)
+#
 print()
 print('Generator')
 def FlatGenerator(nested_list):
-    for x in nested_list :
+    for x in nested_list:
         yield x
 
-a = FlatGenerator()
+a = FlatGenerator(nested_list)
 for x in a:
     for result in x:
+        print(result)
         print(result)
 
 
