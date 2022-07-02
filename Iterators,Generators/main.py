@@ -28,7 +28,7 @@ for item in FlatIterator(nested_list,0,len(nested_list)):
 
 print()
 print('Generator')
-def FlatGenerator():
+def FlatGenerator(nested_list):
     for x in nested_list :
         yield x
 
