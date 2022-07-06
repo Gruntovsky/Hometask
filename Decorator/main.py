@@ -1,6 +1,6 @@
 from datetime import datetime
 import os
-
+from log import log
 
 def decor(func):
     CACHE = {}
@@ -24,5 +24,5 @@ def gift(something):
     result = something
     return result
 
-gift('Привет')
+gift('Hello')
 

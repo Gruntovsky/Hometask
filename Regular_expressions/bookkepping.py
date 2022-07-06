@@ -1,4 +1,4 @@
-from log import log
+from main import decor
 
 documents = [
         {"type": "passport", "number": "2207 876234", "name": "Василий Гупкин"},
@@ -10,7 +10,7 @@ directories = {
         '2': ['10006'],
         '3': []
       }
-@log('C:/Users/Gregory/Desktop/py/')
+@decor
 def name_search(doc_n):
   """p - поиск гражданина по номеру документа"""
   for docs_items in documents:
@@ -18,29 +18,25 @@ def name_search(doc_n):
     person_name = docs_items['name']
     if doc_n == doc_num:
       print(person_name)
-      return person_name
+      break
   else:
     print('Такого номера нет')
-
-@log('C:/Users/Gregory/Desktop/py/')
+@decor
 def get_key(directories):
   """g - на какой полке находится документ"""
   value = input('Введите номер документа: ')
   for k,v in directories.items():
     if value in v:
        print('Документ находится на полке №:',k)
-       return 'Документ находится на полке №:',k
+       break
   else:
-       print('Нет такого документа')
-
-@log('C:/Users/Gregory/Desktop/py/')
+             print('Нет такого документа')
+@decor
 def search():
   """l - cписок людей в архиве"""
   for docs_items in documents:
          print('{} "{}" "{}"'.format(docs_items['type'], docs_items['number'], docs_items['name']))
-         return '{} "{}" "{}"'.format(docs_items['type'], docs_items['number'], docs_items['name'])
-
-@log('C:/Users/Gregory/Desktop/py/')
+@decor
 def add_docs(doc_add):
   """a - Добавляет новые нокументы в documents и кладет на полку.
    если нет указанной полки, команда ее создает и кладет на нее"""
@@ -54,7 +50,6 @@ def add_docs(doc_add):
       directories[doc_add[3]].append(add[1])
   print('Документы: ',documents)
   print('Полки: ',directories)
-  return 'Документы: ',documents,'Полки: ',directories
 
 def commands():
   get_func=input('Команды p,l,g,a; Введите команду:')
