@@ -17,5 +17,6 @@ def log(path):
             CACHE['output'] = output
             with open(f'{path}check_list.json', 'w') as f:
                 f.write(str(CACHE))
+            return output
         return timedate
     return decor
