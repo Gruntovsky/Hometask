@@ -1,10 +1,10 @@
 import pytest
-from ..bookkepping import show_document_info
-from unittest.mock import MagicMock
+from ..bookkeeping import show_document_info
+from unittest.mock import patch
 
-
-def sum(a,b):
-   return a+b
+@patch('input')
+def sum( a = input(),b = input()):
+    return a+b
 
 
 
